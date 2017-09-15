@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+
+      <title>Giphy Buttons</title>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+      <link rel="stylesheet" href="https://bootswatch.com/cyborg/bootstrap.min.css">
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+	
+	<div class="container">
+  		<h1>Gather Gifs from Giphy</h1>
+  	</div>
+
+  		<br>
+
+  		<div id="gifButtons" class="container">
+  		</div>
+
+  		<br>
+	<div class="container">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+  			<div id="gifs">
+  			</div>
+  		</div>
+
+		<div class="col-xs-3">
+            <form id="gif-form" role="form">
+                <h2><legend>Add Button</legend></h2>
+                <div class="form-group">
+                    <label for="newField-input">Add your subject below</label>
+                    <input type="text" id="topic-input">
+                </div>
+                <input id="addGif" type="submit" value="Add your topic" class="btn btn-primary">
+                <input id="removeGif" type="submit" value="Remove last topic" class="btn btn-primary">
+            </form>    
+        </div>
+    </div>
+
+  	<script src="assets/app.js"></script>
+
+  </body>
+</html>
