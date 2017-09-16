@@ -4,6 +4,9 @@ $(document).ready(function(){
 	var addButton;
 	var userTopic;
 	var topicRequest;
+	var giphyReturn;
+	var addDiv;
+	var gifRating;
 
 	//array used to populate buttons when the page loads
 	var topics = ["Running", "The Big Bang Theory", "Yoda", "Animals napping", "Cool bicycles", "Robin Willimas"];
@@ -25,10 +28,19 @@ $(document).ready(function(){
 			url: queryURL,
 			method: "GET"
 		})
-
 		.done(function(response){
 			console.log(response);
-		})
+			$("#gifs").empty();
+			giphyReturn = response.data;
+
+			for(var i=0; i<giphyReturn.length; i++){
+				addDiv = $("<div>");
+				addDiv.addClass("newGif");
+				gifRating = $("<p>").text("Rateing: "+giphyReturn[i].rating);
+				addDiv.append(gifRating);
+				$("#gifs").prepend(addDiv);
+			}
+		});
 	}
 
 
