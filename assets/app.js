@@ -3,6 +3,7 @@ $(document).ready(function(){
 	//Global Variables
 	var addButton;
 	var userTopic;
+	var topicRequest;
 
 	//array used to populate buttons when the page loads
 	var topics = ["Running", "The Big Bang Theory", "Yoda", "Animals napping", "Cool bicycles", "Robin Willimas"];
@@ -11,6 +12,25 @@ $(document).ready(function(){
 	createButtons();
 	addTopic();
 	removeButton();
+
+	//Click handler for gif buttons
+	$(".nextTopic").on("click", showGifs);
+
+	//Show gifs on page
+	function showGifs(){
+		topicRequest = $(this).attr("data-name");
+		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topicRequest + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+		$.ajax({
+			url: queryURL,
+			method: "GET"
+		})
+
+		.done(function(response){
+			console.log(response);
+		})
+	}
+
 
 	//Add user topics to topics array
 	function addTopic(){
@@ -26,6 +46,16 @@ $(document).ready(function(){
 			}
 		});
 	}
+
+	//remove most recent button from page
+	function removeButton(){
+		$("#removeButton").on("click", function(){
+			// console.log(topics.length);
+			topics.pop();
+			createButtons();
+			return false;
+		})
+	}
 		
 	//Create buttons on page for each item in topics array
 	function createButtons(){
@@ -39,13 +69,5 @@ $(document).ready(function(){
 		}
 	}
 
-	//remove most recent button from page
-	function removeButton(){
-		$("#removeButton").on("click", function(){
-			// console.log(topics.length);
-			topics.pop();
-			createButtons();
-			return false;
-		})
-	}
+	
 });
