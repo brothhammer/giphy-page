@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var addGifImg
 
 	//array used to populate buttons when the page loads
-	var topics = ["Running", "The Big Bang Theory", "Yoda", "Animals napping", "Cool bicycles", "Robin Willimas"];
+	var topics = ["Running", "The Big Bang Theory", "Yoda", "Animals napping", "Cool bicycles", "Robin Williams"];
 
 	//Function Calls
 	createButtons();
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	removeButton();
 
 	//Click handler for gif buttons
-	$(".nextTopic").on("click", showGifs);
+	$(document).on("click",".nextTopic", showGifs);
 
 	//Show gifs on page
 	function showGifs(){
@@ -49,17 +49,27 @@ $(document).ready(function(){
 				addGifImg.attr("data-still", giphyReturn[i].images.fixed_height_small_still.url);
 				//moving image
 				addGifImg.attr("data-animate", giphyReturn[i].images.fixed_height_small.url);
-				addGifImg.addClass("image")
+				addGifImg.attr("data-state", "still");
+				addGifImg.addClass("gifImage");
 
 				addDiv.append(addGifImg);
-
+				//Add to page
 				$("#gifs").prepend(addDiv);
 			}
 		});
 	}
 
 	//Click handler to start and stop gifs
-	$(".nextTopic").on
+	$(document).on("click",".gifImage", function(){
+		var state = $(this).attr("data-state");
+		if(state === "still"){
+			$(this).attr("src", $(this).data("animate"));
+			$(this).attr("data-state", "animate");
+		}else{
+			$(this).attr("src", $(this).data("still"));
+        	$(this).attr("data-state", "still");
+		}
+	});
 
 	//Add user topics to topics array
 	function addTopic(){
@@ -68,11 +78,9 @@ $(document).ready(function(){
 			if (userTopic === ""){
 				return false;
 			}
-			else {
 			topics.push(userTopic);
 			createButtons();
 			return false;
-			}
 		});
 	}
 
@@ -96,7 +104,7 @@ $(document).ready(function(){
 			addButton.text(topics[i]);
 			$("#gifButtons").append(addButton);
 		}
-	}
-
-	
+	}	
 });
+
+
