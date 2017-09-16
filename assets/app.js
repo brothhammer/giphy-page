@@ -10,14 +10,20 @@ $(document).ready(function(){
 	//Function Calls
 	createButtons();
 	addTopic();
+	removeButton();
 
 	//Add user topics to topics array
 	function addTopic(){
 		$("#addUserTopic").on("click", function(){
 			userTopic = $("#topic-input").val().trim();
+			if (userTopic === ""){
+				return false;
+			}
+			else {
 			topics.push(userTopic);
 			createButtons();
 			return false;
+			}
 		});
 	}
 		
@@ -31,5 +37,15 @@ $(document).ready(function(){
 			addButton.text(topics[i]);
 			$("#gifButtons").append(addButton);
 		}
+	}
+
+	//remove most recent button from page
+	function removeButton(){
+		$("#removeButton").on("click", function(){
+			// console.log(topics.length);
+			topics.pop();
+			createButtons();
+			return false;
+		})
 	}
 });
