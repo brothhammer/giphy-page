@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var giphyReturn;
 	var addDiv;
 	var gifRating;
+	var addGifImg
 
 	//array used to populate buttons when the page loads
 	var topics = ["Running", "The Big Bang Theory", "Yoda", "Animals napping", "Cool bicycles", "Robin Willimas"];
@@ -34,15 +35,31 @@ $(document).ready(function(){
 			giphyReturn = response.data;
 
 			for(var i=0; i<giphyReturn.length; i++){
+				//create a div for each returned gif and append this with the gif rating
 				addDiv = $("<div>");
 				addDiv.addClass("newGif");
 				gifRating = $("<p>").text("Rateing: "+giphyReturn[i].rating);
 				addDiv.append(gifRating);
+				
+				// create an img element for each returned gif, include still and animated images as attributes,
+				// append this to the div just created then prepend both the rating and gif to #gifs in html
+				addGifImg = $("<img>");
+				addGifImg.attr("src", giphyReturn[i].images.fixed_height_small_still.url);
+				//still image
+				addGifImg.attr("data-still", giphyReturn[i].images.fixed_height_small_still.url);
+				//moving image
+				addGifImg.attr("data-animate", giphyReturn[i].images.fixed_height_small.url);
+				addGifImg.addClass("image")
+
+				addDiv.append(addGifImg);
+
 				$("#gifs").prepend(addDiv);
 			}
 		});
 	}
 
+	//Click handler to start and stop gifs
+	$(".nextTopic").on
 
 	//Add user topics to topics array
 	function addTopic(){
